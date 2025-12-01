@@ -12,8 +12,12 @@ Route::put('/users/{id}', [UserApiController::class, 'update']);
 Route::delete('/users/{id}', [UserApiController::class, 'destroy']);
 
 // Catatan CRUD
-Route::get('/catatan', [CatatanController::class, 'index']);
-Route::post('/catatan', [CatatanController::class, 'store']);
+
 Route::get('/catatan/{id}', [CatatanController::class, 'show']);
 Route::put('/catatan/{id}', [CatatanController::class, 'update']);
 Route::delete('/catatan/{id}', [CatatanController::class, 'destroy']);
+
+Route::get('/catatan', [CatatanController::class, 'index']);
+Route::post('/catatan', [CatatanController::class, 'store']);
+
+

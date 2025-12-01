@@ -57,7 +57,7 @@ input, select, textarea { width:100%; padding:6px; margin:5px 0; border-radius:5
 </head>
 <body>
 
-<h2>CRUD Users & Catatan By Ara</h2>
+<h2>CRUD Users & Catatan By Ara </h2>
 
 <div class="card">
     <h3>Users</h3>
