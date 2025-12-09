@@ -10,30 +10,40 @@ class CatatanWebController extends Controller
     public function index()
     {
         $catatan = Catatan::latest()->get();
-        return view('index', compact('catatan')); // lihat index.blade.php
+        return view('index', compact('catatan')); // pakai resources/views/index.blade.php
     }
 
     public function create()
     {
-        return view('create'); // ← INI DIA!
+        return view('create'); // pakai resources/views/create.blade.php
     }
 
-   public function store(Request $request)
+    public function store(Request $request)
+    {
+        $request->validate([
+            'judul' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        Catatan::create([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+        ]);
+
+        return redirect()->back()->with('success', 'Data berhasil disimpan!');
+    }
+public function delete($id)
 {
-    $request->validate([
-        'judul' => 'required',
-        'deskripsi' => 'required',
-    ]);
+    $catatan = Catatan::find($id);
 
-    Catatan::create([
-        'judul' => $request->judul,
-        'deskripsi' => $request->deskripsi,
-    ]);
+    if (!$catatan) {
+        return redirect()->back()->with('error', 'Catatan tidak ditemukan!');
+    }
 
-    // proses simpan data...
+    $catatan->delete();
 
-    return redirect()->back()->with('success', 'Data berhasil disimpan!');
+    return redirect()->back()->with('success', 'Catatan berhasil dihapus!');
 }
 
 
-} //
+}

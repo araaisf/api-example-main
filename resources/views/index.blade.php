@@ -80,6 +80,23 @@
             border-bottom: none;
         }
 
+        /* Tombol Hapus */
+        .delete-btn {
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: #ff5c8a;
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background: #ff396f;
+            transform: translateY(-2px);
+        }
+
     </style>
 </head>
 
@@ -98,6 +115,7 @@
                 <th>Judul</th>
                 <th>Deskripsi</th>
                 <th>Dibuat</th>
+                <th>Aksi</th> <!-- AKU TAMBAHKAN -->
             </tr>
 
             @foreach($catatan as $c)
@@ -105,9 +123,19 @@
                 <td>{{ $c->judul }}</td>
                 <td>{{ $c->deskripsi }}</td>
                 <td>{{ $c->created_at->format('d M Y H:i') }}</td>
+
+                <td>
+                    <form action="{{ route('catatan.delete', $c->id) }}" 
+                          method="POST" 
+                          onsubmit="return confirm('Yakin ingin menghapus catatan ini?')">
+                        @csrf
+                        @method('DELETE')
+                        <button class="delete-btn">Hapus</button>
+                    </form>
+                </td>
+
             </tr>
             @endforeach
-
         </table>
     </div>
 
